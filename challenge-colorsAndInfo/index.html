@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+
+        .tekst{
+            background-color: black;
+            margin: 10px;
+        }
+
+    #jsonTxt, #jsonTxt2, #jsonTxt3{
+        width: 100vw;
+        text-align: center;
+        font-family:'Times New Roman', Times, serif;
+        font-weight: 100;
+        color: whitesmoke;
+        font-size: 50px;
+    }
+
+    #jsonTxt2{
+        font-size: 29px;
+        font-weight: 800;
+    }
+
+
+    </style>
+
+    <div id="map"></div>
+
+    <div class="tekst">
+    <h1 id="jsonTxt"></h1>
+    <h1 id="jsonTxt3"></h1>
+    <h1 id="jsonTxt2"></h1>
+    </div>
+
+
+
+
+<script>
+
+        let myJson;
+        let json;
+        let farve;
+
+        document.addEventListener("DOMContentLoaded", loadElement);
+        async function loadElement() {
+            let mySvg = await fetch("map.svg");
+            let svg = await mySvg.text();
+
+            document.querySelector("#map").innerHTML = svg;
+
+            myJson = await fetch("data.json");
+            json = await myJson.json();
+
+            document.querySelector("#map").addEventListener("mouseover", changeColor);
+            // document.querySelector("#map").addEventListener("mouseover", capi);
+            document.querySelector("#map").addEventListener("mouseout", changeBack);
+            document.querySelector("#map").addEventListener("mouseover", showText);
+}
+
+        function changeColor(){
+            farve = event.target.getAttribute("fill");
+            console.log(farve);
+
+            event.target.style.fill = "lightyellow";
+            // document.querySelector("path").nextElementSibling.style.fill = "#000";
+        }
+
+            function changeBack(){
+            event.target.style.fill = farve;
+        }
+
+
+        function showText(){
+            // console.log(event.target.getAttribute("id"));
+            
+           let elmId = event.target.parentElement.getAttribute("id");
+
+            console.log(elmId);
+
+            json.forEach(element => {
+                if (elmId == element.city) {
+                  document.querySelector("#jsonTxt").innerHTML = 'City name:  ' + element.city;
+             //     document.querySelector("#jsonTxt3").innerHTML = element.hold;
+                  document.querySelector("#jsonTxt2").innerHTML = 'Current rank:   ' + element.rank;
+                }
+
+        });
+    }
+
+            // function capi(){
+            //     let liste = Array.from(json);
+            //     console.log(liste);
+            //     liste.city.charAt(0).toUpperCase;
+            // }
+            
+
+
+
+</script>
+    
+</body>
+</html>
