@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    #graphic{
+        width: 30vw;
+    }
+    </style>
+    
+    <div id="graphic"></div>
+
+
+
+<script>
+
+        let farve;
+
+        document.addEventListener("DOMContentLoaded", loadElement);
+        async function loadElement() {
+            let mySvg = await fetch("pie.svg");
+            let svg = await mySvg.text();
+
+            document.querySelector("#graphic").innerHTML = svg;
+
+            document.querySelector("#graphic").addEventListener("mouseover", changeColor);
+            document.querySelector("#graphic").addEventListener("mouseout", changeBack);
+}
+
+        function changeColor(){
+            farve = event.target.getAttribute("fill");
+            console.log(farve);
+
+            event.target.style.fill = "red";
+            // document.querySelector("path").nextElementSibling.style.fill = "#000";
+        }
+
+        function changeBack(){
+            event.target.style.fill = farve;
+        }
+
+
+</script>
+
+</body>
+</html>

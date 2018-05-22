@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="graphic"></div>
+
+
+    <p id="jsonTxt"></p>
+
+
+
+
+    <script>
+
+        //         let myJson;
+        // let json;
+
+        // document.addEventListener("DOMContentLoaded", loadSvg);
+
+        
+        //         async function loadSvg() {
+        //     // 1. Load svg
+        //     //------------------------------------------------------------	
+        //     let mySvg = await fetch("layers.svg");
+        //     let svg = await mySvg.text();
+
+        //     myJson = await fetch("text.json");
+        //     json = await myJson.json();
+        //     console.log(json);
+
+        //     document.querySelector("#graphic").innerHTML = svg;
+        //      }
+
+        //      let elem = document.querySelector("#graphic");
+
+
+        //      document.querySelector("#graphic").addEventListener("mouseover", showElement);
+
+        //      function showElement(){
+        //             console.log(event.target.getAttribute("id"));
+
+        //             let info = event.target.getAttribute("id");
+        //             let kasse = document.querySelector("#bikeinfo");
+
+        //         if(document.getElementById("bikeinfo").innerHTML = "bike"){
+        //             document.getElementById("bikeinfo").innerHTML = "Min cykel er dope";
+        //         } else {
+        //             document.getElementById("bikeinfo").style.opacity="1";
+        //         }
+
+        //          document.getElementById("bikeinfo").innerHTML = info;
+        //      }
+
+
+               let myJson;
+        let json;
+
+    document.addEventListener("DOMContentLoaded", loadElement);
+
+        async function loadElement() {
+            let mySvg = await fetch("layers.svg");
+            let svg = await mySvg.text();
+
+            document.querySelector("#graphic").innerHTML = svg;
+
+            myJson = await fetch("text.json");
+            json = await myJson.json();
+            // console.log(json);
+
+       
+    
+    
+    document.querySelector("#graphic").addEventListener("click", showText);
+}
+        function showText(){
+            // console.log(event.target.getAttribute("id"));
+            
+           let elmId = event.target.getAttribute("id");
+
+            console.log(elmId);
+
+            json.forEach(element => {
+                
+                if (elmId == element.id) {
+                    document.querySelector("#jsonTxt").innerHTML = element.text;
+
+                }
+
+        });
+    }
+
+
+
+    </script>
+</body>
+</html>
