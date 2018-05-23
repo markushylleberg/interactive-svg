@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <style>
+        
+        #path{
+            width: 30%;
+            margin: 0 auto;
+        }
+
+        #timeline{
+            /* fill: blue;
+            stroke: green; */
+        }
+
+        #txt_1{
+            opacity: 0;
+            transition: .5s ease;
+        }
+
+        #txt_2{
+            opacity: 0;
+            transition: .5s ease;
+        }
+
+        #txt_3{
+            opacity: 0;
+            transition: .5s ease;
+        }
+
+        svg{
+            stroke-dasharray: 0 1000;
+            transition: 2.2s ease-in;
+        }
+
+
+
+    </style>
+    
+
+<div id="path"></div>
+
+
+
+
+
+
+
+
+<script>
+
+       document.addEventListener("DOMContentLoaded", loadElement);
+        async function loadElement() {
+            let mySvg = await fetch("path.svg");
+            let svg = await mySvg.text();
+
+        document.querySelector("#path").innerHTML = svg;
+
+        document.querySelector("#path").addEventListener("mouseenter", play);
+}
+
+        function play(){
+            document.querySelector("svg").style.strokeDasharray = "300 1000";
+            setTimeout(showone, 500);
+            setTimeout(showtwo, 1500);
+            setTimeout(showthree, 2000);
+        }
+
+        function showone(){
+            document.querySelector("#txt_1").style.opacity = "1";
+        }
+
+        function showtwo(){
+            document.querySelector("#txt_2").style.opacity = "1";
+        }
+
+        function showthree(){
+            document.querySelector("#txt_3").style.opacity = "1";
+        }
+
+
+</script>
+
+</body>
+</html>
