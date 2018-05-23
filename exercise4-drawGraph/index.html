@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <style>
+    svg{
+        width: 50vw;
+        border: 1px solid black;
+    }
+
+    #pline{
+        stroke: green;
+        stroke-dasharray: 0 300;
+        transition: 1s ease;
+    }
+
+    #linje1, #linje2{
+        stroke: darkgray;
+        stroke-width: 0.3px;
+        stroke-dasharray: 0 100;
+        transition: 2s ease;
+    }
+
+    /* .info1, .info2{
+        position: absolute;
+    }
+
+    .info1{
+        top: 25vh;
+        margin-left: 10vw;
+    }
+
+    .info2{
+        top: 8vh;
+        left: 31%;
+    } */
+    
+    
+    </style>
+
+
+
+<div id="container">
+<!-- <p class="info1">her startede forretningen!</p>
+<p class="info2">her gik det skide godt!</p> -->
+<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+<polyline id="pline" points="0,100 70,90 120,75 180,50 230,0" fill="none"/>
+<line id="linje1" x1="64" y1="60" x2="69" y2="86"/>
+<line id="linje2" x1="150" y1="26" x2="170" y2="45"/>
+</svg>
+</div>
+
+
+<script>
+
+    document.querySelector("#container").addEventListener("mouseenter", letsGo);
+
+    function letsGo() {
+        document.querySelector("#pline").style.strokeDasharray = "300 300";
+        document.querySelector("#linje1").style.strokeDasharray = "100 100";
+        document.querySelector("#linje2").style.strokeDasharray = "100 100";
+    };
+
+</script>
+    
+</body>
+</html>
