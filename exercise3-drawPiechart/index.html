@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+    #svgcontainer svg{
+    width: 50vw;
+    height: 100%;
+    border: 1px black solid;
+    margin: 0 auto;
+    margin-top: 2px;
+    background-color: rgb(218, 207, 207);
+    transform: rotate(-90deg);
+    border-radius: 50%;
+}
+
+    #c1{
+        width: 50%;
+    fill: none;
+    stroke: rgb(39, 82, 82);
+    stroke-width: 100;
+    stroke-dasharray: 0 314;
+    stroke-dashoffset: 20;
+    transition: 0.4s ease;
+    }
+
+    #c2{
+        width: 50%;
+    fill: none;
+    stroke: rgb(90, 94, 59);
+    stroke-width: 100;
+    stroke-dasharray: 0 314;
+    stroke-dashoffset: 235;
+    transition: 0.4s ease;
+    }
+
+    #c3{
+        width: 50%;
+    fill: none;
+    stroke: rgb(45, 94, 45);
+    stroke-width: 100;
+    stroke-dasharray: 0 314;
+    stroke-dashoffset: 335;
+    transition: 0.4s ease;
+    }
+
+    #info1, #info2, #info3{
+        position: absolute;
+        z-index: 100;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: whitesmoke;
+    }
+
+    #info1{
+        margin-top: 12%;
+        margin-left: 13vw;
+    }
+
+    #info2{
+        margin-top: 12%;
+        margin-left: 35vw;
+    }
+
+    #info3{
+        margin-top: 38%;
+        margin-left: 24vw;
+    }
+
+    
+    </style>
+
+
+<p id="info1"></p>
+<p id="info2"></p>
+<p id="info3"></p>
+
+    
+    <div id="svgcontainer">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle id="c1" cx="50" cy="50" r="50"/>
+            <circle id="c2" cx="50" cy="50" r="50"/>
+            <circle id="c3" cx="50" cy="50" r="50"/>
+          </svg>
+</div>
+
+
+<script>
+
+        let myJson;
+        let json;
+
+
+        document.addEventListener("DOMContentLoaded", loadElement);
+        async function loadElement() {
+
+            myJson = await fetch("data.json");
+            json = await myJson.json();
+            console.log(json);
+        };
+
+document.querySelector("#svgcontainer").addEventListener("mouseover", loadCirle);
+document.querySelector("#svgcontainer").addEventListener("mouseout", remCircle);
+document.querySelector("#svgcontainer").addEventListener("mouseenter", showText);
+document.querySelector("#svgcontainer").addEventListener("mouseleave", hideText);
+
+function loadCirle(loadElement){
+
+    json.forEach(element => {
+    document.querySelector("circle").style.strokeDasharray = element.letsgo;
+    document.querySelector("circle").nextElementSibling.style.strokeDasharray = element.letsgo;
+    document.querySelector("circle").nextElementSibling.nextElementSibling.style.strokeDasharray = element.letsgo;
+   // console.log("letsgo", element.letsgo);
+    })
+}
+
+function remCircle(){
+    json.forEach(element => {
+    document.querySelector("circle").style.strokeDasharray = element.value;
+    document.querySelector("circle").nextElementSibling.style.strokeDasharray = element.value;
+    document.querySelector("circle").nextElementSibling.nextElementSibling.style.strokeDasharray = element.value;
+})
+}
+
+function showText(){
+
+    let elmId = event.target.getAttribute("id");
+
+    json.forEach(element => {
+        if (elmId == "svgcontainer") {
+    document.querySelector("#info1").innerHTML = element.id;
+    document.querySelector("#info2").innerHTML = element.id;
+    document.querySelector("#info3").innerHTML = element.id;
+        }
+        console.log(elmId);
+})
+}
+
+function hideText(){
+    document.querySelector("#info1").innerHTML = "";
+    document.querySelector("#info2").innerHTML = "";
+    document.querySelector("#info3").innerHTML = "";
+}
+
+</script>
+
+
+
+</body>
+</html>
